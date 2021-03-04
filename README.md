@@ -4,14 +4,13 @@
 # Code
 
 ```
-```diff
 using System;
 
 namespace LibSystemNumbers
 {
     public static class Number
     {
-        private static String _number; +//Введённое пользователем число+
+        private static String _number; //Введённое пользователем число
         private static String _intNumber; //Целая часть числа
         private static String _floatNumber; //Дробная часть числа
         private static int _basis; //Система счисления, в котором находится введённое число
@@ -255,5 +254,4 @@ namespace LibSystemNumbers
         }
     }
 }
-```
 ```
