@@ -17,7 +17,7 @@ namespace LibSystemNumbers
         private static int _basis2; //Система счисления, в которую нужно перевести введённое число
         private const int MinBase = 2; //Минимальное значение системы счисления
         private const int MaxBase = 36; //Максимальное значение системы счисления
-        
+
         //Функция перевода символьного значения числа в целочисленное
         private static int CharToInt(char symbol) { 
             //symbol - Символьное значения числа
@@ -33,7 +33,7 @@ namespace LibSystemNumbers
             if (numbers <= 9) return (char)(numbers + '0');
             else return (char)(numbers + 55);
         }
-
+        
         //Функция проверки коррекности введённого числа
         private static bool IsNumberCorrect() {
             int length = _number.Length; //Длина числа
@@ -50,6 +50,15 @@ namespace LibSystemNumbers
                 if (CharToInt(_number[i]) >= _basis) return false;
             }
 
+            return true;
+        }
+
+        //Функция проверки корректности введенных систем счисления.
+       //Система счисления не может быть меньше 2 и больше 36
+        private static bool IsBasisCorrect() {
+            if ((_basis > MaxBase || _basis < MinBase) || (_basis2 > MaxBase || _basis2 < MinBase)) {
+                return false;
+            }
             return true;
         }
 
@@ -170,7 +179,7 @@ namespace LibSystemNumbers
             char[] nullArrNumbers = { '\0' }; //Хранит пустой массив символов. Возвращается в случае
                                              //некорректности записи числа либо несоответсвии числа с системой счисления 
 
-            if ((_basis > MaxBase || _basis < MinBase) || (_basis2 > MaxBase || _basis2 < MinBase)) {
+            if (IsBasisCorrect() == false) {
                 Console.WriteLine("Basis must be not less than 2 and not more than 36!");
                 return nullArrNumbers;
             }
@@ -254,4 +263,5 @@ namespace LibSystemNumbers
         }
     }
 }
+
 ```
