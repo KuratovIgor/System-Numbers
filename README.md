@@ -5,6 +5,8 @@
 
 ```
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace LibSystemNumbers
 {
@@ -98,37 +100,31 @@ namespace LibSystemNumbers
         //системе счисления, большей 9
         private static char TranslateToMoreSystems(char number)
         {
-            //number - значение числа в системе счисления, большей 9
-            int[] arrOfNumbers = new int[] { //Массив чисел в системе счисления, большей 9
-                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35
+            //Словарь латинского алфавита
+            Dictionary<char, int> dictionaryOfNumbers = new Dictionary<char, int>(26) {
+                {'A', 10}, {'B', 11}, {'C', 12}, {'D', 13}, {'E', 14}, {'F', 15}, {'G', 16}, {'H', 17}, {'I', 18},
+                {'J', 19}, {'K', 20}, {'L', 21}, {'M', 22}, {'N', 23}, {'O', 24}, {'P', 25}, {'Q', 26}, {'R', 27},
+                {'S', 28}, {'T', 29}, {'U', 30}, {'V', 31}, {'W', 32}, {'X', 33}, {'Y', 34}, {'Z', 35}
             };
-            char[] arrOfSymbols = new char[] { //Массив букв, соответсвующих значениям чисел из предыдущего массива
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+            //Словарь чисел
+            Dictionary<int, char> dictionaryOfSymbols = new Dictionary<int, char>(26) {
+                {10, 'A'}, {11, 'B'}, {12, 'C'}, {13, 'D'}, {14, 'E'}, {15, 'F'}, {16, 'G'}, {17, 'H'}, {18, 'I'},
+                {19, 'J'}, {20, 'K'}, {21, 'L'}, {22, 'M'}, {23, 'N'}, {24, 'O'}, {25, 'P'}, {26, 'Q'}, {27, 'R'},
+                {28, 'S'}, {29, 'T'}, {30, 'U'}, {31, 'V'}, {32, 'W'}, {33, 'X'}, {34, 'Y'}, {35, 'Z'}
             };
 
             bool isCheckSymbol = false; //Проверяет, является ли введённое значение буквой
-            int indexNecessaryElement = 0; //Индекс необходиого значения из массивов
-            for (int i = 0; i < arrOfNumbers.Length; i++)
+            if (number >= 'A' && number <= 'Z')
             {
-                if (IntToChar(arrOfNumbers[i]) == number)
-                {
-                    indexNecessaryElement = i;
-                    isCheckSymbol = false;
-                    break;
-                }
-
-                if (arrOfSymbols[i] == number)
-                {
-                    indexNecessaryElement = i;
-                    isCheckSymbol = true;
-                    break;
-                }
+                isCheckSymbol = true;
+            }
+            else
+            {
+                isCheckSymbol = false;
             }
 
-            if (isCheckSymbol == false) return arrOfSymbols[indexNecessaryElement];
-            else return IntToChar(arrOfNumbers[indexNecessaryElement]);
+            if (isCheckSymbol == false) return dictionaryOfSymbols[CharToInt(number)];
+            else return IntToChar(dictionaryOfNumbers[number]);
         }
 
         //Функция перевода дробной части числа в систему счисления _basis2
@@ -263,5 +259,4 @@ namespace LibSystemNumbers
         }
     }
 }
-
 ```
